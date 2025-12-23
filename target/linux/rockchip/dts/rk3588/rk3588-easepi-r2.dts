@@ -214,7 +214,7 @@
 		compatible = "bluetooth-platdata";
 		clocks = <&hym8563>;
 		clock-names = "ext_clock";
-		uart_rts_gpios = <&gpio4 RK_PC4 GPIO_ACTIVE_LOW>;
+		uart_rts_gpios = <&gpio4 RK_PC4 GPIO_ACTIVE_LOW>;// schematic wrongly connected to GPIO4_C3
 		pinctrl-names = "default", "rts_gpio";
 		pinctrl-0 = <&uart9m0_rtsn>, <&bt_reset_gpio>, <&bt_wake_gpio>, <&bt_irq_gpio>;
 		pinctrl-1 = <&uart9m0_gpios>;
@@ -444,7 +444,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pcie2_2_rst>;
 	reset-gpios = <&gpio3 RK_PC1 GPIO_ACTIVE_HIGH>;
-	vpcie3v3-supply = <&vcc3v3_pcie>;
+	vpcie3v3-supply = <&vcc_3v3_s3>;
 	status = "okay";
 };
 
@@ -668,6 +668,7 @@
 	no-mmc;
 	no-sd;
 	non-removable;
+	rockchip,default-sample-phase = <90>;
 	sd-uhs-sdr50;
 	sd-uhs-sdr104;
 	supports-sdio;
@@ -700,7 +701,7 @@
 
 // bluetooth
 &uart9 {
-	pinctrl-0 = <&uart9m0_xfer>;
+	pinctrl-0 = <&uart9m0_xfer &uart9m0_ctsn>;
 	status = "okay";
 };
 
